@@ -44,39 +44,48 @@ public class MedievalGame {
   } // End of main
 
   /* Instance Methods */
-  private Player start(Scanner console) {
+private Player start(Scanner console) {
     // Add start functionality here
     Player player;
-    Art.homeScreen();
     System.out.println("Welcome!");
-    
-      System.out.println("Load game? (y = load, n= new game)");
-      String answer = console.next();
-      while (true) {
-  addDelay(500);
-  if (answer.equals("y")) {
-    System.out.print("\nAhh... I knew I remembered you, what was your name again? Let me see if I can find your backpack: ");
-    player = load(console.next(), console);
-    break;
-  } else if (answer.equals("n")) {
-    System.out.print("\nWell then, don't be shy, go ahead an tell me your name: ");
-    String possibleName = console.next();
+    System.out.println("Load game? (y = load, n= new game)");
+    String answer = console.next();
+
     while (true) {
-      System.out.println("Welcome " + possibleName + ", am I pronouncing that correctly? (Enter 'y' to confirm, 'n' to enter a new name");
-      String nameResponse = console.next().toLowerCase();
-      if (Objects.equals(nameResponse, "y")) break;
-      System.out.println("So sorry, can you spell it for me again?");
-      possibleName = console.next();
+        addDelay(500);
+
+        if (answer.equals("y")) {
+
+            System.out.print("\nAhh... I knew I remembered you, what was your name again? Let me see if I can find your backpack: ");
+            player = load(console.next(), console);
+            break;
+
+        } else if (answer.equals("n")) {
+
+            System.out.print("\nWell then, don't be shy, go ahead an tell me your name: ");
+            String possibleName = console.next();
+
+            while (true) {
+
+                System.out.println("Welcome " + possibleName + ", am I pronouncing that correctly? (Enter 'y' to confirm, 'n' to enter a new name");
+                String nameResponse = console.next().toLowerCase();
+                if (Objects.equals(nameResponse, "y")) break;
+                System.out.println("So sorry, can you spell it for me again?");
+                possibleName = console.next();
+
+            }
+
+            player = new Player(possibleName);
+            break;
+
+        } else {
+
+            System.out.print("Sorry adventurer, I only speak the common tongue, please enter 'y' to load a game or 'n' to start a new game: ");
+            answer = console.next().toLowerCase();
+            
+        }
     }
-    player = new Player(possibleName);
-    break;
-  } else {
-    System.out.print("Sorry adventurer, I only speak the common tongue, please enter 'y' to load a game or 'n' to start a new game: ");
-    answer = console.next().toLowerCase();
-  }
 }
-    return player;
-  } // End of start
 
   private void save() {
     // Add save functionality here
